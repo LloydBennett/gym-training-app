@@ -10,13 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_30_000354) do
+ActiveRecord::Schema.define(version: 2020_05_31_000424) do
+
+  create_table "gyms", force: :cascade do |t|
+    t.string "name"
+    t.text "address"
+  end
+
+  create_table "trainers", force: :cascade do |t|
+    t.string "name"
+    t.text "bio"
+  end
 
   create_table "training_sessions", force: :cascade do |t|
     t.string "title"
     t.date "session_day"
     t.text "session_plan"
     t.time "session_time"
+    t.integer "trainer_id"
+    t.integer "gym_id"
+    t.index ["gym_id"], name: "index_training_sessions_on_gym_id"
+    t.index ["trainer_id"], name: "index_training_sessions_on_trainer_id"
   end
 
 end
